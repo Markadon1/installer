@@ -1,0 +1,20 @@
+.create_container{
+    margin: 10px 0;
+    padding: 0 10px;
+}
+#category_name{
+    margin-right: 10px;
+}
+.cat_name_label{
+    margin-right: 10px;
+}
+#category_name_error{
+    /*margin-left: 175px;*/
+    margin: 5px 0 10px 0;
+}
+.save_cat_btn{
+    max-width: 200px;
+}
+.container_group input{
+    margin: 10px 0;
+}
