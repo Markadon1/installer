@@ -19,6 +19,9 @@ label{
     display: flex;
     flex-direction: column;
 }
+.justify-start{
+    justify-content: flex-start;
+}
 .justify-center{
     justify-content: center;
 }
@@ -27,6 +30,9 @@ label{
 }
 .justify-end{
     justify-content: flex-end;
+}
+.align-start{
+    align-items: flex-start;
 }
 .align-center{
     align-items: center;
@@ -40,7 +46,7 @@ label{
 }
 .container_group{
     width: 98%;
-    margin: auto;
+    margin: 0 auto;
 }
 .input_error{
     color: red;

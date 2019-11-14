@@ -21,6 +21,13 @@ Route::post('/subcategory/create','CategoryController@sub_create');
 
 Route::post('/subcat_input/create','CategoryController@sub_input_create');
 
+
+Route::get('/subcat_edit','CategoryController@sub_edit');
+Route::get('/subcat_delete','CategoryController@delete_subcategory');
+Route::get('/subcat-input_edit','CategoryController@sub_input_edit');
+Route::get('/edit_input_confirm','CategoryController@sub_input_edit_confirm');
+Route::get('/subcat-input_delete','CategoryController@delete_input');
+
 Route::post('/login/enter','Auth\LoginController@enter');
 
 Route::post('register/change_type', 'AjaxController@reg_change');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\SubCategory;
 use App\SubInput;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Category;
 class CategoryController extends Controller
 {
@@ -100,4 +100,66 @@ class CategoryController extends Controller
         return view('pages.category.subcategory_items')
             ->with('subcategory',$subcategory);
     }
+
+    public function sub_edit(Request $request){
+
+        $subcategory = SubCategory::find($request->input('id'));
+
+        return view('pages.category.subcategory_edit')
+            ->with('subcategory',$subcategory);
+
+    }
+    public function sub_input_edit(Request $request){
+
+        $input = SubInput::find($request->input('id'));
+
+        return view('pages.category.edit_sub-item')
+            ->with('input',$input);
+
+    }
+
+    public function sub_input_edit_confirm(Request $request){
+
+        $id = $request->input('id');
+        $name = $request->input('name');
+
+        $input = SubInput::find($id);
+        $input->name = $name;
+        $input->save();
+
+        return view('pages.category.new_input')
+            ->with('input',$input);
+
+    }
+
+    public function delete_category(Request $request){
+
+        $id = $request->input('id');
+
+    }
+
+    public function delete_subcategory(Request $request){
+
+        $id = $request->input('id');
+
+        $sub = SubCategory::find($id);
+
+        $sub->input()->delete();
+
+        $sub->delete();
+
+        DB::table('category_subcategory')->where('subcategory_id','=',$id)->delete();
+
+    }
+
+    public function delete_input(Request $request){
+
+        $id = $request->input('id');
+
+        SubInput::where('id','=',$id)->delete();
+
+        DB::table('subcategory_input')->where('input_id','=',$id)->delete();
+
+    }
+
 }
