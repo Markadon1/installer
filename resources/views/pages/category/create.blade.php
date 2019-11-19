@@ -20,7 +20,25 @@
             <button class="btn btn-success save_cat_btn" type="button" id="save_category">Сохранить</button>
         </div>
     @endif
-
+        <h2 class="w-100 sub_title  text-center">Подключённые шаблоны</h2>
+        <div class="flex">
+            <div class="container_group flex-col">
+            <button type="button" class="btn btn-success save_cat_btn" id="add_template">Подключить шаблоны</button>
+                <div class="flex-col" style="margin: 15px 5px">
+                    @foreach($templates as $template)
+                    <div class="flex align-center">
+                        <input type="checkbox" class="check_templates" value="{{$template->id}}" style="margin-right: 10px" id="template_check_{{$template->id}}">
+                        <label for="template_check_{{$template->id}}">{{$template->name}}</label>
+                    </div>
+                        @endforeach
+                </div>
+                <div class="flex-col" id="added_templates">
+                @foreach($category->templates as $template)
+                    <p>{{$template->name}}</p>
+                @endforeach
+                </div>
+            </div>
+        </div>
         <h2 class="w-100 sub_title  text-center">Создание/изменение подкатегорий</h2>
         <div class="flex justify-between">
             <div class="flex w-50">
@@ -130,7 +148,23 @@
             })
         });
 
-
+        $('#add_template').click(function () {
+            var id = $('#category_id').val();
+            var values = $('.check_templates:checked').map(function () {
+                return this.value;
+            }).get();
+            $.ajax({
+                type: "GET",
+                url: "/add_templates",
+                data:{
+                    id:id,
+                    values:values
+                },
+                success:function (result) {
+                    $('#added_templates').html(result);
+                }
+            })
+        });
 
 
     </script>

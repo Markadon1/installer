@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\SubCategory;
 use App\SubInput;
+use App\Templates;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Category;
@@ -19,7 +20,11 @@ class CategoryController extends Controller
         else{
             $category = Category::find($id);
         }
+
+        $templates = Templates::all();
+
         return view('pages.category.create')
+            ->with('templates',$templates)
             ->with('category',$category);
 
     }
@@ -162,4 +167,22 @@ class CategoryController extends Controller
 
     }
 
+    public function add_templates(Request $request){
+
+        $id = $request->input('id');
+        $values = $request->values;
+
+        $category = Category::find($id);
+
+        DB::table('category_template')->where('category_id','=',$id)->delete();
+        foreach ($values as $value){
+            $template = Templates::find($value);
+            $category->templates()->save($template);
+
+        }
+
+        return view('pages.category.added_templates')
+            ->with('category',$category);
+
+    }
 }

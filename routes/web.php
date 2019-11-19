@@ -13,9 +13,24 @@
 
 Route::get('/', 'PagesController@index');
 
+
+Route::get('/cards','PagesController@cards');
+Route::get('/cards/change','CardController@redirect_to_change_cat');
+Route::get('/cards/create','CardController@redirect_to_create');
+Route::post('/cards/create','CardController@create');
+
+
+Route::get('/templates','PagesController@templates');
+Route::get('/templates/create','TemplateController@redirect_to_create');
+Route::post('/template/create','TemplateController@create');
+Route::post('/temp_input/create','TemplateController@input_create');
+
+
 Route::get('/category', 'PagesController@category');
 Route::get('/category/create', 'CategoryController@redirect_to_create');
 Route::post('/category/create', 'CategoryController@create');
+
+Route::get('/add_templates','CategoryController@add_templates');
 
 Route::post('/subcategory/create','CategoryController@sub_create');
 
